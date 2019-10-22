@@ -19,16 +19,17 @@ const port = process.env.PORT || config.get("port");
 // declare your callback function the old way
 app.get('/', function (req, res) {
   res.send('Welcome to the default page!  <br> <br>' +
-    'Try going to different URIs by adding these at the end: <br> <br>' +
+    'Try going to different URIs by adding these at the end: (Have fun seeing what they do!) <br> <br>' +
     '/hello <br>' +
     '/big <br>' +
     '/json <br>' +
     '/greeting/yourname <br>' +
-    '/yo/Dr.Rogers <br>' +
+    '/yo/yourname <br>' +
     '/fortune <br>' +
-    '/fancy/?first=Denise&last=Case <br>' +
+    '/fancy/?first=firstName&last=lastName <br>' +
+    '/leaguejunglers' + 
     '<br> <br>' +
-    'Fork the source code from <a href="https://github.com/denisecase/node-express-app">https://github.com/denisecase/node-express-app</a>'
+    'Source code: <a href="https://github.com/JacobTaylorNWMSU/node-express-app">https://github.com/JacobTaylorNWMSU/node-express-app</a>'
   )
 })
 
@@ -82,6 +83,16 @@ app.get('/fortune', (req,res) => {
   }
 })
 
+let junglers = ['Aatrox.', 'Amumu.', 'Dr. Mundo.', 'Elise.', 'Evelyn.', 'Gragas.', 'Graves.', 'Hecarim.', 
+'Ivern.', 'Jarvin IV.', 'Jax.', 'Karthus.', 'Kayn.', 'Kha`Zix.', 'Kindred.', 'Lee Sin.', 'Malphite.', 'Master Yi', 
+'Nautilis.', 'Nidalee.', 'Nocturne.', 'Nunu.', 'Olaf.', 'Pantheon.', 'Rammus.', 'Rek`Sai.', 'Rengar.', 'Sejuani.', 
+'Shaco.', 'Shyvana.', 'Skarner.', 'Sylas.', 'Taliyah.', 'Trundle.', 'Udyr.', 'Vi.', 'Volibear.', 'Warwick.', 'Wukong.', 
+'Xin Zhao.', 'Zac.']
+
+app.get('/leaguejunglers', (req, res) => {
+  res.send(`Your current League of Legends Jungler: ${junglers[randomInt(0, junglers.length)]}`)
+})
+
 // Use middleware to handle all non-managed routes (e.g. /xyz)
 // https://expressjs.com/en/api.html#req.originalUrl
 app.use((req, res, next) => {
@@ -97,8 +108,9 @@ app.listen(port, hostname, () => {
   console.log(`   Try /json`)
   console.log(`   Try /fortune`)
   console.log(`   Try /greeting/yourname`)
-  console.log(`   Try /yo/Dr.Rogers`)
-  console.log(`   Try /fancy/?first=Denise&last=Case`)
+  console.log(`   Try /yo/yourname`)
+  console.log(`   Try /fancy/?first=firstName&last=lastName`)
+  console.log(`   Try this /leaguejunglers`)
   console.log('\n Hit CTRL-C CTRL-C to stop\n')
 })
 
